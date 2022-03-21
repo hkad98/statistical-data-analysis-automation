@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+
 import matplotlib.pyplot as plt
 from pandas import DataFrame
 
@@ -27,7 +28,7 @@ class MyLinearRegression:
         self.assumptions = dict()
 
     def check_assumptions(self,
-                          sample_size=20,
+                          sample_size=10,
                           linearity_threshold=0.7,
                           homoscedasticity_threshold=0.05,
                           independence_interval=None,

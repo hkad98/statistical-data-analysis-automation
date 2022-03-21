@@ -57,14 +57,16 @@ def generate_combinations(sdk: GoodDataSdk, workspace_id: str) -> set[Triplet]:
     for dataset in catalog.datasets:
         facts.extend(dataset.facts)
 
-    numbers: list[Numeric] = metrics + facts
+    numbers: list[Numeric] = []
+    numbers.extend(metrics)
+    numbers.extend(facts)
 
-    combinations = itertools.combinations(numbers, 2)
-    result = set()
-    for combination in combinations:
-        valid_objects = content_service.compute_valid_objects(workspace_id, list(combination))
+    combinations = set()
+    pairs = itertools.combinations(numbers, 2)
+    for pair in pairs:
+        valid_objects = content_service.compute_valid_objects(workspace_id, list(pair))
         for a in valid_objects.get("attribute", []):
             attribute = catalog.find_label_attribute(f"label/{a}")
             if attribute:
-                result.add(Triplet([attribute] + list(combination)))
-    return result
+                combinations.add(Triplet([attribute] + list(pair)))
+    return combinations

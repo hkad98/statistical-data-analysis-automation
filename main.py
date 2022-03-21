@@ -76,9 +76,9 @@ if __name__ == '__main__':
     linear_regressions = run()
 
     # Have a look at the best linear regression.
-    # linear_regressions[0].visualize()
+    linear_regressions[0].visualize()
 
     # Have a look at the worst linear regression.
-    # linear_regressions[-1].visualize()
+    linear_regressions[-1].visualize()
 
     # You are more than welcome to further examine these objects and check assumptions.
