@@ -1,0 +1,73 @@
+attributes:
+- description: Customer id
+  id: customer_id
+  labels:
+  - description: Customer id
+    id: customer_id
+    primary: true
+    sourceColumn: customer_id
+    tags:
+    - Customers
+    title: Customer id
+  tags:
+  - Customers
+  title: Customer id
+- description: Customer name
+  id: customer_name
+  labels:
+  - description: Customer name
+    id: customer_name
+    primary: true
+    sourceColumn: customer_name
+    tags:
+    - Customers
+    title: Customer name
+  tags:
+  - Customers
+  title: Customer name
+- description: Region
+  id: region
+  labels:
+  - description: Region
+    id: region
+    primary: true
+    sourceColumn: region
+    tags:
+    - Customers
+    title: Region
+  tags:
+  - Customers
+  title: Region
+- description: State
+  id: state
+  labels:
+  - description: Location
+    id: geo__state__location
+    primary: false
+    sourceColumn: geo__state__location
+    tags:
+    - Customers
+    title: Location
+  - description: State
+    id: state
+    primary: true
+    sourceColumn: state
+    tags:
+    - Customers
+    title: State
+  tags:
+  - Customers
+  title: State
+dataSourceTableId:
+  dataSourceId: demo-ds
+  id: customers
+  type: dataSource
+facts: []
+grain:
+- id: customer_id
+  type: attribute
+id: customers
+references: []
+tags:
+- Customers
+title: Customers

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+from pathlib import Path
 
 from generator import generate_combinations, Triplet
 from linear_regression import MyLinearRegression
@@ -8,7 +9,6 @@ from gooddata_sdk import GoodDataSdk
 from gooddata_pandas import GoodPandas
 from dotenv import load_dotenv
 import pickle
-from pathlib import Path
 from tqdm import tqdm
 
 load_dotenv()
@@ -16,7 +16,9 @@ load_dotenv()
 
 def set_up() -> None:
     sdk = GoodDataSdk.create(os.getenv('HOST'), os.getenv('TOKEN'))
-    sdk.catalog_workspace.load_and_put_declarative_workspaces(Path("data"))
+    sdk.catalog_workspace.load_and_put_declarative_workspaces()
+    sdk.catalog_data_source.load_and_put_declarative_data_sources(credentials_path=Path("credentials.yaml"),
+                                                                  test_data_sources=True)
 
 
 def cache_combinations(workspace_id: str, name: str = "combinations.pickle") -> None:

@@ -1,6 +1,7 @@
 poc
 large_combinations.pickle
 .idea
+credentials.yaml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
