@@ -1,28 +1,27 @@
 from __future__ import annotations
+from config import Config
 
-import os
 from pathlib import Path
 
 from generator import generate_combinations, Triplet
 from linear_regression import MyLinearRegression
-from gooddata_sdk import GoodDataSdk
-from gooddata_pandas import GoodPandas
 from dotenv import load_dotenv
 import pickle
 from tqdm import tqdm
 
 load_dotenv()
 
+sdk = Config.sdk
+pandas = Config.pandas
+
 
 def set_up() -> None:
-    sdk = GoodDataSdk.create(os.getenv('HOST'), os.getenv('TOKEN'))
-    sdk.catalog_workspace.load_and_put_declarative_workspaces()
     sdk.catalog_data_source.load_and_put_declarative_data_sources(credentials_path=Path("credentials.yaml"),
                                                                   test_data_sources=True)
+    sdk.catalog_workspace.load_and_put_declarative_workspaces()
 
 
-def cache_combinations(workspace_id: str, name: str = "combinations.pickle") -> None:
-    sdk = GoodDataSdk.create(os.getenv('HOST'), os.getenv('TOKEN'))
+def cache_combinations(workspace_id: str = Config.workspace_id, name: str = "combinations.pickle") -> None:
     combinations = generate_combinations(sdk, workspace_id)
     with open(name, "wb") as f:
         pickle.dump(combinations, f)
@@ -33,17 +32,16 @@ def load_combinations(name: str = "combinations.pickle") -> set[Triplet]:
         return pickle.load(f)
 
 
-def run(generate: bool = False) -> list[MyLinearRegression]:
+def run(generate: bool = False, workspace_id: str = Config.workspace_id) -> list[MyLinearRegression]:
     """
-    :param generate: Flag to trigger generation. If it is not defined then cached combinations are used. :return:
-    Sorted list of MyLinearRegression objects. Assumptions of these objects can be easily re-run with different values.
+    :param generate: Flag to trigger generation. If  it is not defined then cached combinations are used
+    :param workspace_id: The id of the workspace we want to explore
+    :return: Sorted list of MyLinearRegression objects.
+    Assumptions of these objects can be easily re-run with different values.
     """
-    workspace_id = "demo"
-    pandas = GoodPandas(os.getenv('HOST'), os.getenv('TOKEN'))
     pandas_df = pandas.data_frames(workspace_id)
 
     if generate:
-        sdk = GoodDataSdk.create(os.getenv('HOST'), os.getenv('TOKEN'))
         combinations = generate_combinations(sdk, workspace_id)
     else:
         combinations = load_combinations("combinations.pickle")
@@ -68,7 +66,7 @@ def run(generate: bool = False) -> list[MyLinearRegression]:
     return regressions
 
 
-if __name__ == '__main__':
+def main():
     # This will set up whole GoodData CN CE environment for you
     set_up()
 
@@ -84,3 +82,7 @@ if __name__ == '__main__':
     linear_regressions[-1].visualize()
 
     # You are more than welcome to further examine these objects and check assumptions.
+
+
+if __name__ == '__main__':
+    main()

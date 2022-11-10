@@ -1,53 +1,36 @@
 attributes:
-- description: Product id
-  id: product_id
-  labels:
-  - description: Product id
-    id: product_id
-    primary: true
-    sourceColumn: product_id
-    tags:
-    - Products
-    title: Product id
-  tags:
-  - Products
-  title: Product id
-- description: Product name
-  id: product_name
-  labels:
   - description: Product name
     id: product_name
-    primary: true
+    labels: []
     sourceColumn: product_name
     tags:
-    - Products
+      - Products
     title: Product name
-  tags:
-  - Products
-  title: Product name
-- description: Category
-  id: products.category
-  labels:
   - description: Category
     id: products.category
-    primary: true
+    labels: []
     sourceColumn: category
     tags:
-    - Products
+      - Products
     title: Category
-  tags:
-  - Products
-  title: Category
+  - description: Product id
+    id: products.product_id
+    labels: []
+    sourceColumn: product_id
+    tags:
+      - Products
+    title: Product id
 dataSourceTableId:
   dataSourceId: demo-ds
   id: products
   type: dataSource
+description: Products
 facts: []
 grain:
-- id: product_id
-  type: attribute
+  - id: products.product_id
+    type: attribute
 id: products
 references: []
 tags:
-- Products
+  - Products
 title: Products
