@@ -1,24 +1,24 @@
 # Statistical Data Analysis Automation
 
 This project serves as a proof of concept for statistical data analysis automatization. The project uses Python and
-GoodData.CN Community Edition (CE). To understand what this project is about please first
+GoodData.CN. To understand what this project is about please first
 read [this short article](https://medium.com/gooddata-developers/how-to-automate-your-statistical-data-analysis-852f1a463b95)
 .
 
 ## Installation and Usage
 
-### 1. Install and Run GoodData.CN CE
+### 1. Install and Run GoodData.CN
 
 If you don't already have an instance of GoodData.CN up and running on your system.
 
 **Follow these steps:**
 
-1. Run the [GoodData.CN CE docker image](https://www.gooddata.com/developers/cloud-native-community-edition/) using the following command:
+1. Run the [GoodData.CN docker image](https://www.gooddata.com/developers/cloud-native-community-edition/) using the following command:
     ```bash
     docker run -d -i -t -e LICENSE_AND_PRIVACY_POLICY_ACCEPTED=YES -p 3000:3000 -p 5432:5432 -v gd-volume:/data gooddata/gooddata-cn-ce:2.1
     ```
 
-   After few minutes your GoodData.CN CE will be ready.
+   After few minutes your GoodData.CN will be ready.
 
 2. Access your GoodData.CN deployment using your internet browser. The URL is http://localhost:3000, where you should see the login page.
 
@@ -68,7 +68,7 @@ For checking proof of concept run the `main.py` script:
 python main.py
 ```
 
-Please note that receiving data from GoodData.CN CE and checking assumptions may take some time.
+Please note that receiving data from GoodData.CN and checking assumptions may take some time.
 
 For example on MacBook Pro (14-inch, 2021) with Python 3.10.8
 

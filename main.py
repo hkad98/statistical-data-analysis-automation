@@ -67,7 +67,7 @@ def run(generate: bool = False, workspace_id: str = Config.workspace_id) -> list
 
 
 def main():
-    # This will set up whole GoodData CN CE environment for you
+    # This will set up whole GoodData CN environment for you
     set_up()
 
     # This will generate or load from cache all combinations and perform linear regression on them. The output is a
